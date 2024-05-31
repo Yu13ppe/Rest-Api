@@ -9,7 +9,7 @@ export class CreateCustomerDto {
   })
   @IsString()
   @IsNotEmpty()
-  readonly name: string;
+  readonly cust_name: string;
 
   @ApiProperty({
     description: 'The email of a customer',
@@ -19,7 +19,7 @@ export class CreateCustomerDto {
   @IsString()
   @IsNotEmpty()
   @IsEmail()
-  readonly email: string;
+  readonly cust_email: string;
 
   @ApiProperty({
     description: 'The phone number of a customer',
@@ -28,7 +28,7 @@ export class CreateCustomerDto {
   })
   @IsString()
   @IsNotEmpty()
-  readonly phone: string;
+  readonly cust_phone: string;
 
   @ApiProperty({
     description: 'The address of a customer',
@@ -37,7 +37,7 @@ export class CreateCustomerDto {
   })
   @IsString()
   @IsNotEmpty()
-  readonly address: string;
+  readonly cust_address: string;
 }
 
 export class UpdateCustomerDto extends PartialType(CreateCustomerDto) {}

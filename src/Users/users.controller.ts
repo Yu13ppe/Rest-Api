@@ -13,7 +13,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto, UpdateUserDto } from './users.dtos';
 
-@ApiTags('users')
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
@@ -26,13 +26,13 @@ export class UsersController {
 
   @Get(':userId')
   getOne(@Param('userId', ParseIntPipe) userId: number) {
-    return this.usersService.findOne(userId);
+    return this.usersService.findByid(userId);
   }
 
-  @Get(':userId/orders')
-  getOrder(@Param('userId', ParseIntPipe) userId: number) {
-    return this.usersService.getOrdersByUser(userId);
-  }
+  // @Get(':userId/orders')
+  // getOrder(@Param('userId', ParseIntPipe) userId: number) {
+  //   return this.usersService.getOrdersByUser(userId);
+  // }
 
   @Post()
   create(@Body() payload: CreateUserDto) {

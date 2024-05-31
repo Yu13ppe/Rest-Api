@@ -33,7 +33,7 @@ export class ProductsController {
 
   @Get(':productId')
   getOne(@Param('productId', ParseIntPipe) productId: number) {
-    return this.productsService.findOne(+productId);
+    return this.productsService.findByid(productId);
   }
 
   @Post()
@@ -41,16 +41,16 @@ export class ProductsController {
     return this.productsService.create(payload);
   }
 
-  @Put(':id')
+  @Put(':productId')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('productId', ParseIntPipe) productId: number,
     @Body() payload: UpdateProductDto,
   ) {
-    return this.productsService.update(id, payload);
+    return this.productsService.update(productId, payload);
   }
 
-  @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.productsService.delete(+id);
+  @Delete(':productId')
+  delete(@Param('productId', ParseIntPipe) productId: number) {
+    return this.productsService.delete(productId);
   }
 }

@@ -25,7 +25,7 @@ export class CustomersController {
 
   @Get(':customerId')
   getOne(@Param('customerId', ParseIntPipe) customerId: number) {
-    return this.customersService.findOne(+customerId);
+    return this.customersService.findByid(customerId);
   }
 
   @Post()
@@ -35,14 +35,14 @@ export class CustomersController {
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('customerId', ParseIntPipe) customerId: number,
     @Body() payload: UpdateCustomerDto,
   ) {
-    return this.customersService.update(id, payload);
+    return this.customersService.update(customerId, payload);
   }
 
-  @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.customersService.delete(+id);
+  @Delete(':customerId')
+  delete(@Param('customerId', ParseIntPipe) customerId: number) {
+    return this.customersService.delete(customerId);
   }
 }

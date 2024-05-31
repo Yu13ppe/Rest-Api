@@ -1,0 +1,33 @@
+version: '3'
+services:
+  #  Create a service named db.
+  database:
+    #   Use the Docker Image postgres. This will pull the newest release.
+    image: 'postgres'
+    #   Give the container the name my_postgres. You can changes to something else.
+    container_name: 'localpg'
+    #   Setup the username, password, and database name. You can changes these values.
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=RestApiDB
+    #   Maps port 54320 (localhost) to port 5432 on the container. You can change the ports to fix your needs.
+    ports:
+      - '54320:5432'
+    #   Set a volume some that database is not lost after shutting down the container.
+    #   I used the name postgres-data but you can changed it to something else.
+    volumes:
+      - postgresql-volume:/var/lib/postgresql/data
+
+  #  Create a service named pgadmin.
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=root@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - '5050:80'
+
+volumes:
+  postgresql-volume:
+    external: true

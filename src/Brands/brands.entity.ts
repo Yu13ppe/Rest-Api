@@ -1,4 +1,10 @@
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity()
 export class Brand {
-  id: number;
-  name: string;
+  @PrimaryGeneratedColumn()
+  bra_id: number;
+
+  @Column()
+  bra_name: string;
 }

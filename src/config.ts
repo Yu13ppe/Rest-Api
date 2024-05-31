@@ -1,9 +1,7 @@
-import { registerAs } from '@nestjs/config';
+export const PORT = parseInt(process.env.PORT) || 3000;
 
-export default registerAs('app', () => ({
-  apiKey: process.env.API_KEY,
-  database: {
-    host: process.env.DATABASE_HOST,
-    port: parseInt(process.env.DATABASE_PORT, 10) || 5432,
-  },
-}));
+export const DB_HOST = process.env.DB_PORT || 'localhost';
+export const DB_PORT = parseInt(process.env.DB_PORT) || 54320;
+export const DB_USER = process.env.DB_PORT || 'root';
+export const DB_PASSWORD = process.env.DB_PORT || 'root';
+export const DB_NAME = process.env.DB_PORT || 'RestApiDB';

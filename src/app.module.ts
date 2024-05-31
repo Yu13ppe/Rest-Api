@@ -1,30 +1,51 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+// import { Client } from 'pg';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
 
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
-import { CustomersModule } from './Customers/customers.module';
+import { CustomersModule } from './customers/customers.module';
 import { CategoriesModule } from './categories/categories.module';
 import { BrandsModule } from './brands/brands.module';
 
-const API_KEY = '123456';
+// const client = new Client({
+//   user: 'root',
+//   host: 'localhost',
+//   database: 'RestApiDB',
+//   password: '123456',
+//   port: 5432,
+// });
+
+// client.connect();
+// client.query('SELECT * FROM tasks', (err, res) => {
+//   console.log(err);
+//   console.log(res.rows);
+// });
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: DB_HOST,
+      port: DB_PORT,
+      username: DB_USER,
+      password: DB_PASSWORD,
+      database: DB_NAME,
+      entities: [__dirname + 'src/**/*.entity.ts'],
+      autoLoadEntities: true,
+      retryDelay: 3000,
+      retryAttempts: 10,
+      //synchronize: true, //No usar en produccion.
+      //dropSchema: true, //No usar en produccion.
     }),
     ProductsModule,
     UsersModule,
     CustomersModule,
     CategoriesModule,
     BrandsModule,
-  ],
-  providers: [
-    {
-      provide: 'API_KEY',
-      useValue: API_KEY,
-    },
   ],
 })
 export class AppModule {}

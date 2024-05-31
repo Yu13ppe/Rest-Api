@@ -23,9 +23,9 @@ export class BrandsController {
     return this.brandsService.findAll();
   }
 
-  @Get(':id')
-  getOne(@Param('id', ParseIntPipe) id: number) {
-    return this.brandsService.findOne(+id);
+  @Get(':brandId')
+  getOne(@Param('brandId', ParseIntPipe) brandId: number) {
+    return this.brandsService.findByid(brandId);
   }
 
   @Post()
@@ -33,16 +33,16 @@ export class BrandsController {
     return this.brandsService.create(payload);
   }
 
-  @Put(':id')
+  @Put(':brandId')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('brandId', ParseIntPipe) brandId: number,
     @Body() payload: UpdateBrandDto,
   ) {
-    return this.brandsService.update(id, payload);
+    return this.brandsService.update(brandId, payload);
   }
 
-  @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.brandsService.delete(+id);
+  @Delete(':brandId')
+  delete(@Param('brandId', ParseIntPipe) brandId: number) {
+    return this.brandsService.delete(brandId);
   }
 }
