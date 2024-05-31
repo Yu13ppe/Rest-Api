@@ -13,12 +13,12 @@ export class Product {
   @Column()
   prod_description: string;
 
-  @Column()
+  @Column({ type: 'float' })
   prod_price: number;
 
-  @ManyToMany(() => Brand, (brand) => brand.bra_id)
+  @ManyToMany(() => Brand, (brand) => brand.product)
   brand: Brand[];
 
-  @ManyToMany(() => Category, (category) => category.cat_id)
+  @ManyToMany(() => Category, (category) => category.product)
   category: Category[];
 }

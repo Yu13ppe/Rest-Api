@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-// import { Client } from 'pg';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
 
@@ -9,20 +8,6 @@ import { UsersModule } from './users/users.module';
 import { CustomersModule } from './customers/customers.module';
 import { CategoriesModule } from './categories/categories.module';
 import { BrandsModule } from './brands/brands.module';
-
-// const client = new Client({
-//   user: 'root',
-//   host: 'localhost',
-//   database: 'RestApiDB',
-//   password: '123456',
-//   port: 5432,
-// });
-
-// client.connect();
-// client.query('SELECT * FROM tasks', (err, res) => {
-//   console.log(err);
-//   console.log(res.rows);
-// });
 
 @Module({
   imports: [
@@ -38,8 +23,8 @@ import { BrandsModule } from './brands/brands.module';
       autoLoadEntities: true,
       retryDelay: 3000,
       retryAttempts: 10,
-      //synchronize: true, //No usar en produccion.
-      //dropSchema: true, //No usar en produccion.
+      synchronize: true, //No usar en produccion.
+      dropSchema: true, //No usar en produccion.
     }),
     ProductsModule,
     UsersModule,

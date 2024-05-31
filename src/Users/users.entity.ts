@@ -9,5 +9,8 @@ export class User {
   use_name: string;
 
   @Column()
+  adm_password: string;
+
+  @Column()
   use_email: string;
 }

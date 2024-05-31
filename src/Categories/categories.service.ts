@@ -15,24 +15,10 @@ export class CategoriesService {
     @InjectRepository(Category)
     private categoryRepository: Repository<Category>,
   ) {}
-  // private categories: Category[] = [
-  //   {
-  //     id: 1,
-  //     name: 'Category 1',
-  //   },
-  // ];
 
   findAll() {
     return this.categoryRepository.find();
   }
-
-  // findOne(id: number) {
-  //   const category = this.categories.find((category) => category.id === id);
-  //   if (!category) {
-  //     throw new NotFoundException(`Category #${id} not found`);
-  //   }
-  //   return category;
-  // }
 
   async findById(cat_id: number) {
     const category = await this.categoryRepository.findOne({
@@ -54,15 +40,6 @@ export class CategoriesService {
     return category;
   }
 
-  // create(payload: CreateCategoryDto) {
-  //   const newCategory = {
-  //     id: this.categories.length + 1,
-  //     ...payload,
-  //   };
-  //   this.categories.push(newCategory);
-  //   return newCategory;
-  // }
-
   async create(payload: CreateCategoryDto) {
     const entity = await this.categoryRepository.findOne({
       where: { cat_name: payload.cat_name },
@@ -74,19 +51,6 @@ export class CategoriesService {
     this.categoryRepository.save(newCategory);
   }
 
-  // update(id: number, payload: UpdateCategoryDto) {
-  //   const category = this.findOne(id);
-  //   if (category) {
-  //     const index = this.categories.findIndex((category) => category.id === id);
-  //     this.categories[index] = {
-  //       ...category,
-  //       ...payload,
-  //     };
-  //     return this.categories[index];
-  //   }
-  //   return null;
-  // }
-
   async update(cat_id: number, payload: UpdateCategoryDto) {
     const entity = await this.categoryRepository.findOne({
       where: { cat_id },
@@ -96,15 +60,6 @@ export class CategoriesService {
     }
     this.categoryRepository.update(cat_id, payload);
   }
-
-  // delete(id: number) {
-  //   const index = this.categories.findIndex((category) => category.id === id);
-  //   if (index === -1) {
-  //     throw new NotFoundException(`Category #${id} not found`);
-  //   }
-  //   this.categories.splice(index, 1);
-  //   return true;
-  // }
 
   async delete(cat_id: number): Promise<DeleteResult> {
     try {
