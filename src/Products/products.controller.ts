@@ -24,16 +24,24 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
-  @Get('filter')
-  getFilter() {
-    return {
-      message: `Filtering products`,
-    };
-  }
-
   @Get(':productId')
   getOne(@Param('productId', ParseIntPipe) productId: number) {
     return this.productsService.findByid(productId);
+  }
+
+  @Get('/name/:prod_name')
+  findByName(@Param('prod_name') prod_name: string) {
+    return this.productsService.findByName(prod_name);
+  }
+
+  @Get('/category/:category_id')
+  findByCategory(@Param('category_id') category_id: number) {
+    return this.productsService.findByCategory(category_id);
+  }
+
+  @Get('/brand/:brand_id')
+  findByBrand(@Param('brand_id') brand_id: number) {
+    return this.productsService.findByBrand(brand_id);
   }
 
   @Post()

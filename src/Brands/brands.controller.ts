@@ -25,7 +25,12 @@ export class BrandsController {
 
   @Get(':brandId')
   getOne(@Param('brandId', ParseIntPipe) brandId: number) {
-    return this.brandsService.findByid(brandId);
+    return this.brandsService.findById(brandId);
+  }
+
+  @Get('/name/:cat_name')
+  findByName(@Param('cat_name') cat_name: string) {
+    return this.brandsService.findByName(cat_name);
   }
 
   @Post()

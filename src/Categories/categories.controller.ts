@@ -25,7 +25,12 @@ export class CategoriesController {
 
   @Get(':categoryId')
   getOne(@Param('id', ParseIntPipe) categoryId: number) {
-    return this.categoriesService.findByid(categoryId);
+    return this.categoriesService.findById(categoryId);
+  }
+
+  @Get('/name/:cat_name')
+  findByName(@Param('cat_name') cat_name: string) {
+    return this.categoriesService.findByName(cat_name);
   }
 
   @Post()

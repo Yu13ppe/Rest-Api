@@ -34,10 +34,24 @@ export class CategoriesService {
   //   return category;
   // }
 
-  async findByid(cat_id: number) {
-    return await this.categoryRepository.findOne({
+  async findById(cat_id: number) {
+    const category = await this.categoryRepository.findOne({
       where: { cat_id },
     });
+    if (!category) {
+      throw new NotFoundException(`Category #${cat_id} not found`);
+    }
+    return category;
+  }
+
+  async findByName(cat_name: string) {
+    const category = await this.categoryRepository.findOne({
+      where: { cat_name },
+    });
+    if (!category) {
+      throw new NotFoundException(`Category #${cat_name} not found`);
+    }
+    return category;
   }
 
   // create(payload: CreateCategoryDto) {

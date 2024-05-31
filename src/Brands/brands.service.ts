@@ -34,10 +34,24 @@ export class BrandsService {
   //   return brand;
   // }
 
-  async findByid(bra_id: number) {
-    return this.brandRepository.findOne({
+  async findById(bra_id: number) {
+    const brand = await this.brandRepository.findOne({
       where: { bra_id },
     });
+    if (!brand) {
+      throw new NotFoundException(`Brand #${bra_id} not found`);
+    }
+    return brand;
+  }
+
+  async findByName(bra_name: string) {
+    const brand = await this.brandRepository.findOne({
+      where: { bra_name },
+    });
+    if (!brand) {
+      throw new NotFoundException(`Brand #${bra_name} not found`);
+    }
+    return brand;
   }
 
   // create(payload: CreateBrandDto) {

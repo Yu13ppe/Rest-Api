@@ -1,6 +1,6 @@
-// import { Brand } from 'src/Brands/brands.entity';
-// import { Category } from 'src/Categories/categories.entity';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Brand } from 'src/Brands/brands.entity';
+import { Category } from 'src/Categories/categories.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 
 @Entity()
 export class Product {
@@ -16,9 +16,9 @@ export class Product {
   @Column()
   prod_price: number;
 
-  // @ManyToMany(() => Brand, (brand) => brand.bra_id)
-  // brand: Brand[];
+  @ManyToMany(() => Brand, (brand) => brand.bra_id)
+  brand: Brand[];
 
-  // @ManyToMany(() => Category, (category) => category.cat_id)
-  // category: Category[];
+  @ManyToMany(() => Category, (category) => category.cat_id)
+  category: Category[];
 }

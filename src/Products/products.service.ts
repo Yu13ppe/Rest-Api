@@ -5,6 +5,8 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Product } from './products.entity';
+import { CategoriesService } from '../Categories/categories.service';
+import { BrandsService } from '../Brands/brands.service';
 import { CreateProductDto, UpdateProductDto } from './products.dtos';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
@@ -13,6 +15,9 @@ import { DeleteResult, Repository } from 'typeorm';
 export class ProductsService {
   constructor(
     @InjectRepository(Product) private productRepository: Repository<Product>,
+    private categoryService: CategoriesService,
+    // Inyectamos el servicio de Brand
+    private brandService: BrandsService,
   ) {}
   // private products: Product[] = [
   //   {
@@ -30,7 +35,43 @@ export class ProductsService {
   async findByid(prod_id: number) {
     return this.productRepository.findOne({
       where: { prod_id },
+      relations: ['category', 'brand'],
     });
+  }
+
+  async findByName(prod_name: string) {
+    const product = await this.productRepository.findOne({
+      where: { prod_name },
+      relations: ['category', 'brand'],
+    });
+    if (!product) {
+      throw new NotFoundException(`Product #${prod_name} not found`);
+    }
+    return product;
+  }
+
+  async findByCategory(category_id: number) {
+    const cate = await this.categoryService.findById(category_id);
+    const product = await this.productRepository.find({
+      where: { category: cate },
+      relations: ['category', 'brand'],
+    });
+    if (!product) {
+      throw new NotFoundException(`Product #${category_id} not found`);
+    }
+    return product;
+  }
+
+  async findByBrand(brand_id: number) {
+    const brand = await this.brandService.findById(brand_id);
+    const product = await this.productRepository.find({
+      where: { brand: brand },
+      relations: ['category', 'brand'],
+    });
+    if (!product) {
+      throw new NotFoundException(`Product #${brand_id} not found`);
+    }
+    return product;
   }
 
   // create(payload: CreateProductDto) {
