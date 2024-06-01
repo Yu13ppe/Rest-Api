@@ -20,15 +20,21 @@ export class ProductsService {
     private brandService: BrandsService,
   ) {}
 
-  findAll() {
-    return this.productRepository.find();
+  async findAll() {
+    return this.productRepository.find({
+      relations: ['category', 'brand'],
+    });
   }
 
-  async findByid(prod_id: number) {
-    return this.productRepository.findOne({
+  async findById(prod_id: number) {
+    const product = await this.productRepository.findOne({
       where: { prod_id },
       relations: ['category', 'brand'],
     });
+    if (!product) {
+      throw new NotFoundException(`Product #${prod_id} not found`);
+    }
+    return product;
   }
 
   async findByName(prod_name: string) {

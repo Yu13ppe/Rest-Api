@@ -1,6 +1,12 @@
-import { Brand } from 'src/Brands/brands.entity';
-import { Category } from 'src/Categories/categories.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Brand } from '../brands/brands.entity';
+import { Category } from '../categories/categories.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 @Entity()
 export class Product {
@@ -17,8 +23,10 @@ export class Product {
   prod_price: number;
 
   @ManyToMany(() => Brand, (brand) => brand.product)
+  @JoinTable()
   brand: Brand[];
 
   @ManyToMany(() => Category, (category) => category.product)
+  @JoinTable()
   category: Category[];
 }

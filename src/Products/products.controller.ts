@@ -13,7 +13,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { CreateProductDto, UpdateProductDto } from './products.dtos';
 
-@ApiTags('products')
+@ApiTags('Products')
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
@@ -24,22 +24,22 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
-  @Get(':productId')
-  getOne(@Param('productId', ParseIntPipe) productId: number) {
-    return this.productsService.findByid(productId);
+  @Get(':id')
+  findById(@Param('id') id: number) {
+    return this.productsService.findById(id);
   }
 
-  @Get('/name/:prod_name')
+  @Get('/name/:name')
   findByName(@Param('prod_name') prod_name: string) {
     return this.productsService.findByName(prod_name);
   }
 
-  @Get('/category/:category_id')
+  @Get('/category/:categoryId')
   findByCategory(@Param('category_id') category_id: number) {
     return this.productsService.findByCategory(category_id);
   }
 
-  @Get('/brand/:brand_id')
+  @Get('/brand/:brandId')
   findByBrand(@Param('brand_id') brand_id: number) {
     return this.productsService.findByBrand(brand_id);
   }

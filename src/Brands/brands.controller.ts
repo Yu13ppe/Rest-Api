@@ -13,7 +13,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { BrandsService } from './brands.service';
 import { CreateBrandDto, UpdateBrandDto } from './brands.dtos';
 
-@ApiTags('brands')
+@ApiTags('Brands')
 @Controller('brands')
 export class BrandsController {
   constructor(private brandsService: BrandsService) {}
@@ -28,9 +28,9 @@ export class BrandsController {
     return this.brandsService.findById(brandId);
   }
 
-  @Get('/name/:cat_name')
-  findByName(@Param('cat_name') cat_name: string) {
-    return this.brandsService.findByName(cat_name);
+  @Get('/name/:name')
+  findByName(@Param('name') name: string) {
+    return this.brandsService.findByName(name);
   }
 
   @Post()

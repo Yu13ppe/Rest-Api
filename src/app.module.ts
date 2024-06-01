@@ -23,8 +23,8 @@ import { BrandsModule } from './brands/brands.module';
       autoLoadEntities: true,
       retryDelay: 3000,
       retryAttempts: 10,
-      synchronize: true, //No usar en produccion.
-      dropSchema: true, //No usar en produccion.
+      //synchronize: true, //No usar en produccion.
+      //dropSchema: true, //No usar en produccion.
     }),
     ProductsModule,
     UsersModule,
