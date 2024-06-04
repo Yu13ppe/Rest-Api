@@ -1,7 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
+import {
+  DB_HOST,
+  DB_NAME,
+  DB_PASSWORD,
+  DB_PORT,
+  DB_USER,
+  DATABASE_URL,
+} from './config';
 
 import { ProductsModule } from './Products/products.module';
 import { UsersModule } from './Users/users.module';
@@ -19,6 +26,7 @@ import { BrandsModule } from './Brands/brands.module';
       username: DB_USER,
       password: DB_PASSWORD,
       database: DB_NAME,
+      url: DATABASE_URL,
       entities: [__dirname + 'src/**/*.entity.ts'],
       autoLoadEntities: true,
       retryDelay: 3000,
