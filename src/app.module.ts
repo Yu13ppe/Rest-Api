@@ -3,11 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from './config';
 
-import { ProductsModule } from './products/products.module';
-import { UsersModule } from './users/users.module';
-import { CustomersModule } from './customers/customers.module';
-import { CategoriesModule } from './categories/categories.module';
-import { BrandsModule } from './brands/brands.module';
+import { ProductsModule } from './Products/products.module';
+import { UsersModule } from './Users/users.module';
+import { CustomersModule } from './Customers/customers.module';
+import { CategoriesModule } from './Categories/categories.module';
+import { BrandsModule } from './Brands/brands.module';
 
 @Module({
   imports: [
@@ -23,6 +23,7 @@ import { BrandsModule } from './brands/brands.module';
       autoLoadEntities: true,
       retryDelay: 3000,
       retryAttempts: 10,
+      ssl: true,
       //synchronize: true, //No usar en produccion.
       //dropSchema: true, //No usar en produccion.
     }),
