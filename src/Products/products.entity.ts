@@ -1,5 +1,5 @@
-import { Brand } from '../brands/brands.entity';
-import { Category } from '../categories/categories.entity';
+import { Brand } from '../Brands/brands.entity';
+import { Category } from '../Categories/categories.entity';
 import {
   Entity,
   Column,
