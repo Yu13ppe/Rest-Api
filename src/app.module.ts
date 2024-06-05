@@ -32,8 +32,8 @@ import { BrandsModule } from './Brands/brands.module';
       retryDelay: 3000,
       retryAttempts: 10,
       ssl: true,
-      //synchronize: true, //No usar en produccion.
-      //dropSchema: true, //No usar en produccion.
+      synchronize: true, //No usar en produccion.
+      dropSchema: true, //No usar en produccion.
     }),
     ProductsModule,
     UsersModule,
